@@ -7,15 +7,16 @@
 <title>Snake Game | CM TECH</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --green: #39ff88;
-  --cyan: #00eaff;
+  --bg: #09051b;
+  --panel: #17102d;
   --purple: #a855f7;
-  --dark: #050816;
-  --panel: rgba(15, 25, 49, .82);
-  --white: #f4f8ff;
+  --blue: #38bdf8;
+  --pink: #ff4da6;
+  --yellow: #ffd166;
+  --text: #f8f4ff;
 }
 
 * {
@@ -26,249 +27,146 @@
 
 body {
   min-height: 100vh;
-  padding: 25px 12px;
-  color: var(--white);
-  font-family: 'Poppins', sans-serif;
+  padding: 22px 12px;
+  color: var(--text);
+  font-family: Poppins, sans-serif;
   background:
-    radial-gradient(ellipse at 15% 15%, rgba(0,234,255,.13), transparent 35%),
-    radial-gradient(ellipse at 85% 80%, rgba(168,85,247,.16), transparent 35%),
-    linear-gradient(135deg,#030611,#0b1024,#030611);
+    radial-gradient(circle at 10% 15%, #6122a833, transparent 35%),
+    radial-gradient(circle at 90% 80%, #0088ff33, transparent 35%),
+    linear-gradient(135deg,#09051b,#100b2a,#080b20);
   overflow-x: hidden;
 }
 
-/* BACKGROUND LIGHT EFFECTS */
+/* BACKGROUND */
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: -1;
   background-image:
-    radial-gradient(2px 2px at 20% 30%, #ffffff88 50%, transparent),
-    radial-gradient(2px 2px at 70% 60%, #00eaff99 50%, transparent),
-    radial-gradient(1px 1px at 40% 80%, #ffffff88 50%, transparent),
-    radial-gradient(2px 2px at 90% 20%, #39ff8888 50%, transparent);
-  background-size: 180px 180px;
-  animation: stars 20s linear infinite;
-  z-index: -1;
+    radial-gradient(2px 2px at 20% 30%,#fff 50%,transparent),
+    radial-gradient(2px 2px at 80% 20%,#38bdf8 50%,transparent),
+    radial-gradient(2px 2px at 50% 80%,#ff4da6 50%,transparent);
+  background-size: 170px 170px;
+  animation: starMove 18s linear infinite;
 }
 
-@keyframes stars {
-  from { transform: translateY(0); }
-  to { transform: translateY(-180px); }
+@keyframes starMove {
+  to { background-position: 170px 170px; }
 }
-
-.orb {
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: .16;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.orb.one {
-  background: #00eaff;
-  top: 10%;
-  left: -120px;
-}
-
-.orb.two {
-  background: #a855f7;
-  bottom: 5%;
-  right: -120px;
-}
-
-/* MAIN CONTAINER */
 
 .container {
-  width: 100%;
   max-width: 540px;
   margin: auto;
-  position: relative;
-  animation: appear .9s ease;
+  animation: pageEnter 1s ease;
 }
 
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* HEADER */
 
 .header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  font-size: 12px;
+  color: var(--blue);
   letter-spacing: 5px;
-  color: var(--cyan);
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
   margin-bottom: 12px;
-  text-shadow: 0 0 15px var(--cyan);
-}
-
-.logo::before,
-.logo::after {
-  content: "";
-  width: 30px;
-  height: 1px;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
+  text-shadow: 0 0 15px var(--blue);
 }
 
 .header h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(25px, 7vw, 37px);
+  font-family: Orbitron,sans-serif;
+  font-size: clamp(24px,7vw,36px);
   font-weight: 900;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg,#39ff88,#00eaff,#a855f7,#39ff88);
+  background: linear-gradient(90deg,#38bdf8,#a855f7,#ff4da6,#38bdf8);
   background-size: 300%;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: gradientText 5s linear infinite;
+  animation: titleGradient 5s linear infinite;
 }
 
-@keyframes gradientText {
-  from { background-position: 0%; }
+@keyframes titleGradient {
   to { background-position: 300%; }
 }
 
 .header p {
-  color: #8c9bb9;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 3px;
+  color: #a69abf;
   margin-top: 8px;
 }
 
 /* GAME PANEL */
 
 .game-panel {
-  padding: 17px;
-  border: 1px solid rgba(0,234,255,.22);
-  border-radius: 23px;
-  background: var(--panel);
-  backdrop-filter: blur(20px);
-  box-shadow:
-    0 0 30px rgba(0,234,255,.08),
-    0 15px 50px rgba(0,0,0,.5),
-    inset 0 0 25px rgba(255,255,255,.025);
+  padding: 16px;
+  border: 1px solid #a855f755;
+  border-radius: 22px;
+  background: rgba(23,16,45,.9);
+  box-shadow: 0 0 30px #a855f722,0 15px 50px #0008;
 }
-
-/* SCORE AREA */
 
 .stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3,1fr);
   gap: 9px;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .stat {
-  text-align: center;
   padding: 12px 5px;
-  background: rgba(255,255,255,.045);
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 13px;
+  text-align: center;
+  background: #ffffff09;
+  border: 1px solid #a855f733;
+  border-radius: 12px;
 }
 
 .stat small {
   display: block;
-  color: #8493b2;
+  color: #a69abf;
   font-size: 9px;
-  letter-spacing: 1.5px;
-  margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 .stat strong {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 19px;
-  color: var(--green);
-  text-shadow: 0 0 12px rgba(57,255,136,.5);
+  font-family: Orbitron,sans-serif;
+  font-size: 18px;
+  color: var(--blue);
+  text-shadow: 0 0 12px #38bdf888;
 }
-
-.stat:nth-child(2) strong {
-  color: var(--cyan);
-  text-shadow: 0 0 12px rgba(0,234,255,.5);
-}
-
-.stat:nth-child(3) strong {
-  color: #ffd166;
-  text-shadow: 0 0 12px rgba(255,209,102,.4);
-}
-
-.score-pop {
-  animation: pop .25s ease;
-}
-
-@keyframes pop {
-  50% { transform: scale(1.4); }
-}
-
-/* GAME CANVAS */
 
 .canvas-wrap {
-  position: relative;
-  border-radius: 15px;
   overflow: hidden;
-  border: 2px solid rgba(57,255,136,.45);
-  box-shadow:
-    0 0 15px rgba(57,255,136,.15),
-    inset 0 0 20px rgba(57,255,136,.05);
+  border-radius: 14px;
+  border: 2px solid #a855f777;
+  box-shadow: 0 0 18px #a855f733;
 }
 
 canvas {
   width: 100%;
   display: block;
-  background: #071322;
   aspect-ratio: 1;
+  background: #080d20;
 }
 
-/* GAME STATUS */
-
-.game-status {
+.status {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 15px 2px;
+  margin: 13px 2px;
+  font-size: 10px;
+  color: #a69abf;
 }
-
-.status-text {
-  color: #a5b4ce;
-  font-size: 11px;
-}
-
-.status-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background: var(--green);
-  border-radius: 50%;
-  margin-right: 6px;
-  box-shadow: 0 0 10px var(--green);
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: .3; }
-}
-
-/* BUTTONS */
 
 .btn-row {
   display: flex;
@@ -277,97 +175,87 @@ canvas {
 
 .btn {
   flex: 1;
-  padding: 12px 8px;
-  border: 1px solid rgba(0,234,255,.35);
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 11px;
   color: white;
-  background: linear-gradient(135deg,rgba(0,234,255,.12),rgba(168,85,247,.12));
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
+  border: 1px solid #a855f777;
+  background: linear-gradient(135deg,#a855f733,#38bdf822);
+  font-weight: 700;
   cursor: pointer;
   transition: .3s;
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  border-color: var(--cyan);
-  box-shadow: 0 0 18px rgba(0,234,255,.25);
-}
-
-.btn:active {
-  transform: scale(.96);
+  box-shadow: 0 0 18px #a855f766;
 }
 
 .btn.primary {
-  color: #03120b;
-  background: linear-gradient(90deg,#39ff88,#00eaff);
+  color: #fff;
   border: none;
-  font-weight: 800;
-  box-shadow: 0 0 18px rgba(57,255,136,.25);
+  background: linear-gradient(100deg,#8138e9,#168de8,#e83b9c);
+  background-size: 200%;
+  animation: buttonGradient 3s linear infinite;
 }
 
-/* TOUCH CONTROLS */
+@keyframes buttonGradient {
+  to { background-position: 200%; }
+}
+
+/* CONTROLS */
 
 .controls {
-  width: 210px;
-  margin: 20px auto 5px;
   display: grid;
   grid-template-columns: repeat(3,1fr);
   gap: 8px;
+  width: 210px;
+  margin: 20px auto 4px;
 }
 
 .control {
-  height: 55px;
-  border: 1px solid rgba(0,234,255,.25);
-  border-radius: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,234,255,.06);
-  color: var(--cyan);
-  font-size: 22px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  background: #38bdf814;
+  border: 1px solid #38bdf855;
+  border-radius: 12px;
+  color: var(--blue);
+  font-size: 21px;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
-  transition: .2s;
 }
 
 .control:active {
-  background: var(--green);
-  color: #001b10;
-  box-shadow: 0 0 20px var(--green);
+  background: var(--purple);
+  color: white;
   transform: scale(.9);
 }
 
-.empty {
-  visibility: hidden;
-}
+.empty { visibility: hidden; }
 
 /* LEADERBOARD */
 
 .leaderboard {
-  margin-top: 22px;
+  margin-top: 20px;
   padding: 19px;
-  border-radius: 20px;
-  border: 1px solid rgba(168,85,247,.25);
-  background: rgba(15,25,49,.8);
-  box-shadow: 0 10px 35px rgba(0,0,0,.3);
+  background: rgba(23,16,45,.9);
+  border: 1px solid #ff4da644;
+  border-radius: 19px;
 }
 
-.lb-title {
+.leaderboard h2 {
   text-align: center;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1px;
-  margin-bottom: 17px;
-  color: #e5c3ff;
-  text-shadow: 0 0 15px #a855f7;
-  animation: lbGlow 2s infinite alternate;
+  font-family: Orbitron,sans-serif;
+  font-size: 15px;
+  color: var(--pink);
+  text-shadow: 0 0 15px var(--pink);
+  margin-bottom: 15px;
+  animation: headingPulse 2s infinite alternate;
 }
 
-@keyframes lbGlow {
-  to { text-shadow: 0 0 25px #a855f7,0 0 35px #00eaff; }
+@keyframes headingPulse {
+  to { text-shadow: 0 0 25px var(--pink),0 0 40px var(--purple); }
 }
 
 .leader-list {
@@ -379,182 +267,374 @@ canvas {
 .lb-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 11px 13px;
-  border-radius: 11px;
-  background: rgba(255,255,255,.045);
-  border: 1px solid rgba(255,255,255,.05);
-  animation: cardIn .4s ease both;
-  transition: .3s;
-}
-
-.lb-card:hover {
-  transform: translateX(5px);
-  background: rgba(0,234,255,.09);
+  padding: 11px;
+  gap: 12px;
+  background: #ffffff09;
+  border: 1px solid #ffffff12;
+  border-radius: 10px;
+  animation: cardIn .5s ease both;
 }
 
 @keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translateX(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.lb-rank {
-  width: 32px;
-  color: var(--cyan);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.lb-name {
-  flex: 1;
-  font-size: 12px;
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lb-score {
-  color: #ffd166;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 13px;
-}
-
-.empty-board {
-  text-align: center;
-  padding: 15px;
-  color: #8795b1;
-  font-size: 12px;
-}
-
-/* FOOTER */
+.lb-rank { color: var(--blue); font-weight: 800; }
+.lb-name { flex: 1; font-size: 12px; }
+.lb-score { color: var(--yellow); font-weight: 800; font-size: 12px; }
 
 footer {
   text-align: center;
-  margin-top: 23px;
-  padding-bottom: 10px;
-  color: #74839f;
+  color: #a69abf;
   font-size: 11px;
-  letter-spacing: 1px;
+  margin: 23px 0 10px;
+  line-height: 1.9;
 }
 
 footer strong {
-  color: var(--green);
-  text-shadow: 0 0 12px var(--green);
+  color: var(--pink);
+  text-shadow: 0 0 12px var(--pink);
 }
 
-/* OVERLAY */
+/* ==================================
+   PREMIUM ANIMATED NAME WINDOW
+================================== */
 
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
-  background: rgba(2,5,15,.88);
-  backdrop-filter: blur(12px);
-  transition: opacity .35s;
+  align-items: center;
+  padding: 18px;
+  overflow: hidden;
+  background: rgba(3,3,17,.92);
+  backdrop-filter: blur(13px);
+  transition: opacity .6s,visibility .6s;
 }
 
 .overlay.hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
-.overlay-box {
-  width: 100%;
-  max-width: 360px;
-  padding: 32px 23px;
-  text-align: center;
-  border-radius: 23px;
-  background: linear-gradient(145deg,#111e38,#080f20);
-  border: 1px solid rgba(0,234,255,.35);
-  box-shadow: 0 0 45px rgba(0,234,255,.15);
-  animation: boxIn .5s ease;
+/* FLOATING PARTICLES */
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-@keyframes boxIn {
+.particle {
+  position: absolute;
+  bottom: -30px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 15px var(--blue);
+  animation: particleUp linear infinite;
+}
+
+.particle:nth-child(3n) {
+  background: var(--pink);
+  box-shadow: 0 0 15px var(--pink);
+}
+
+.particle:nth-child(3n+1) {
+  background: var(--purple);
+  box-shadow: 0 0 15px var(--purple);
+}
+
+@keyframes particleUp {
   from {
+    transform: translateY(0) translateX(0);
     opacity: 0;
-    transform: scale(.8) translateY(20px);
   }
+  15% { opacity: 1; }
   to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(-115vh) translateX(70px);
+    opacity: 0;
   }
 }
 
-.overlay-icon {
-  font-size: 57px;
-  margin-bottom: 12px;
-  animation: snakeBounce 1.5s infinite;
-  filter: drop-shadow(0 0 15px var(--green));
+/* GLOWING BACKGROUND CIRCLES */
+
+.glow-circle {
+  position: absolute;
+  border: 1px solid #a855f744;
+  border-radius: 50%;
+  animation: rotateCircle 12s linear infinite;
 }
 
-@keyframes snakeBounce {
-  50% { transform: translateY(-9px) rotate(5deg); }
+.glow-circle.one {
+  width: 360px;
+  height: 360px;
 }
 
-.overlay-box h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 21px;
-  color: var(--green);
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px rgba(57,255,136,.6);
+.glow-circle.two {
+  width: 430px;
+  height: 430px;
+  border-color: #38bdf833;
+  animation-direction: reverse;
+  animation-duration: 18s;
 }
 
-.overlay-box p {
-  color: #9baac6;
-  font-size: 12px;
-  line-height: 1.8;
-  margin-bottom: 20px;
+@keyframes rotateCircle {
+  to { transform: rotate(360deg); }
 }
 
-.overlay-box input {
+/* MAIN WINDOW */
+
+.overlay-box {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  padding: 13px;
-  border-radius: 10px;
-  background: #081426;
-  color: white;
-  border: 1px solid rgba(0,234,255,.35);
-  outline: none;
+  max-width: 390px;
+  padding: 30px 24px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  border-radius: 25px;
+  background:
+    linear-gradient(145deg,rgba(35,20,69,.98),rgba(9,15,39,.98));
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  box-shadow:
+    0 0 0 1px #a855f788,
+    0 0 30px #a855f744,
+    0 0 75px #38bdf822,
+    0 25px 70px #000b;
+  animation: windowEnter 1s cubic-bezier(.16,1,.3,1);
+}
+
+.overlay-box::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  padding: 2px;
+  background: linear-gradient(120deg,#38bdf8,#a855f7,#ff4da6,#38bdf8);
+  background-size: 300% 300%;
+  animation: borderFlow 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes borderFlow {
+  to { background-position: 300% 300%; }
+}
+
+@keyframes windowEnter {
+  0% {
+    opacity: 0;
+    transform: scale(.55) rotateX(25deg) translateY(60px);
+  }
+  70% { transform: scale(1.04); }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0) translateY(0);
+  }
+}
+
+/* ANIMATED SNAKE ICON */
+
+.snake-icon {
+  font-size: 68px;
+  display: inline-block;
   margin-bottom: 13px;
+  filter: drop-shadow(0 0 15px #39ff88);
+  animation: snakeFloat 2s ease-in-out infinite;
 }
 
-.overlay-box input:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 15px rgba(57,255,136,.2);
+@keyframes snakeFloat {
+  0%,100% { transform: translateY(0) rotate(-7deg); }
+  50% { transform: translateY(-14px) rotate(7deg); }
 }
 
-.overlay-box .btn {
+/* TITLE */
+
+.welcome-title {
+  font-family: Orbitron,sans-serif;
+  font-size: clamp(19px,5vw,25px);
+  font-weight: 900;
+  line-height: 1.5;
+  background: linear-gradient(90deg,#38bdf8,#c084fc,#ff4da6,#38bdf8);
+  background-size: 300%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: titleFlow 4s linear infinite;
+}
+
+@keyframes titleFlow {
+  to { background-position: 300%; }
+}
+
+.welcome-subtitle {
+  font-size: 11px;
+  color: #c1b5df;
+  margin-top: 9px;
+  min-height: 36px;
+  letter-spacing: 1px;
+}
+
+/* ANIMATED LINE */
+
+.animated-line {
+  width: 65px;
+  height: 3px;
+  margin: 17px auto;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#38bdf8,#a855f7,#ff4da6);
+  box-shadow: 0 0 12px #a855f7;
+  animation: lineExpand 2s ease-in-out infinite alternate;
+}
+
+@keyframes lineExpand {
+  to { width: 150px; }
+}
+
+/* NAME LABEL */
+
+.input-label {
+  display: block;
+  text-align: left;
+  color: #c4b5fd;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 18px 0 8px;
+}
+
+/* INPUT */
+
+.input-wrap {
+  position: relative;
+  padding: 2px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#38bdf8,#a855f7,#ff4da6,#38bdf8);
+  background-size: 300%;
+  animation: inputGlow 4s linear infinite;
+}
+
+@keyframes inputGlow {
+  to { background-position: 300%; }
+}
+
+.input-wrap input {
   width: 100%;
-  padding: 14px;
+  height: 49px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: #0b1027;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  font-family: Poppins,sans-serif;
 }
+
+.input-wrap input::placeholder {
+  color: #777391;
+  letter-spacing: 1px;
+}
+
+.input-wrap:focus-within {
+  box-shadow: 0 0 20px #a855f777;
+  transform: scale(1.02);
+}
+
+/* START BUTTON */
+
+.start-button {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+  font-family: Orbitron,sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 2px;
+  background: linear-gradient(100deg,#7839d9,#168de8,#e83b9c);
+  background-size: 200%;
+  box-shadow: 0 0 22px #a855f755;
+  animation: buttonFlow 4s linear infinite,buttonPulse 2s infinite;
+  transition: transform .3s;
+}
+
+@keyframes buttonFlow {
+  to { background-position: 200%; }
+}
+
+@keyframes buttonPulse {
+  50% { box-shadow: 0 0 30px #a855f7aa,0 0 45px #38bdf833; }
+}
+
+.start-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 40%;
+  height: 200%;
+  background: #ffffff66;
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0%,35% { left: -80%; }
+  70%,100% { left: 140%; }
+}
+
+.start-button:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.start-button:active {
+  transform: scale(.95);
+}
+
+/* BOTTOM TEXT */
+
+.bottom-text {
+  font-size: 9px;
+  color: #9a91b7;
+  margin-top: 18px;
+  letter-spacing: 2px;
+}
+
+.bottom-text span {
+  color: var(--pink);
+}
+
+/* GAME OVER */
 
 .final-score {
-  font-family: 'Orbitron', sans-serif;
+  font-family: Orbitron,sans-serif;
   font-size: 30px;
-  color: #ffd166;
+  color: var(--yellow);
   margin: 15px 0;
+  text-shadow: 0 0 15px #ffd16688;
 }
 
-/* MOBILE */
+[hidden] { display: none !important; }
 
 @media(max-width:420px) {
   .game-panel { padding: 12px; }
-  .header h1 { font-size: 24px; }
-  .stat strong { font-size: 16px; }
-  .control { height: 50px; }
+  .overlay-box { padding: 26px 19px; }
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -569,118 +649,125 @@ footer strong {
 
 <body>
 
-<div class="orb one"></div>
-<div class="orb two"></div>
-
 <div class="container">
 
-  <header class="header">
-    <div class="logo">CM TECH PRESENTS</div>
-    <h1>🐍 SNAKE GAME</h1>
-    <p>THE ULTIMATE ARCADE CHALLENGE</p>
-  </header>
+<header class="header">
+  <div class="logo">✦ CM TECH PRESENTS ✦</div>
+  <h1>🐍 SNAKE GAME</h1>
+  <p>THE ULTIMATE ARCADE CHALLENGE</p>
+</header>
 
-  <main class="game-panel">
+<main class="game-panel">
 
-    <div class="stats">
-      <div class="stat">
-        <small>SCORE</small>
-        <strong id="score">0</strong>
-      </div>
-      <div class="stat">
-        <small>BEST SCORE</small>
-        <strong id="best">0</strong>
-      </div>
-      <div class="stat">
-        <small>LEVEL</small>
-        <strong id="level">1</strong>
-      </div>
+  <div class="stats">
+    <div class="stat">
+      <small>SCORE</small>
+      <strong id="score">0</strong>
     </div>
-
-    <div class="canvas-wrap">
-      <canvas id="canvas" width="400" height="400"></canvas>
+    <div class="stat">
+      <small>BEST SCORE</small>
+      <strong id="best">0</strong>
     </div>
-
-    <div class="game-status">
-      <span class="status-text">
-        <span class="status-dot" id="statusDot"></span>
-        <span id="statusText">READY TO PLAY</span>
-      </span>
-      <span class="status-text">⚡ NEON MODE</span>
+    <div class="stat">
+      <small>LEVEL</small>
+      <strong id="level">1</strong>
     </div>
+  </div>
 
-    <div class="btn-row">
-      <button class="btn primary" id="restart">↻ RESTART</button>
-      <button class="btn" id="pause">Ⅱ PAUSE</button>
-    </div>
+  <div class="canvas-wrap">
+    <canvas id="canvas" width="400" height="400"></canvas>
+  </div>
 
-    <div class="controls">
-      <div class="control empty"></div>
-      <div class="control" data-dir="up">▲</div>
-      <div class="control empty"></div>
+  <div class="status">
+    <span>● <span id="statusText">READY TO PLAY</span></span>
+    <span>⚡ NEON MODE</span>
+  </div>
 
-      <div class="control" data-dir="left">◀</div>
-      <div class="control" data-dir="down">▼</div>
-      <div class="control" data-dir="right">▶</div>
-    </div>
+  <div class="btn-row">
+    <button class="btn primary" id="restart">↻ RESTART</button>
+    <button class="btn" id="pause">Ⅱ PAUSE</button>
+  </div>
 
-  </main>
+  <div class="controls">
+    <div class="control empty"></div>
+    <div class="control" data-dir="up">▲</div>
+    <div class="control empty"></div>
+    <div class="control" data-dir="left">◀</div>
+    <div class="control" data-dir="down">▼</div>
+    <div class="control" data-dir="right">▶</div>
+  </div>
 
-  <section class="leaderboard">
-    <h2 class="lb-title">🏆 HALL OF FAME</h2>
-    <div class="leader-list" id="leaderList">
-      <div class="empty-board">No players yet. Be the first champion!</div>
-    </div>
-  </section>
+</main>
 
-  <footer>
-    DESIGNED & DEVELOPED BY<br>
-    <strong>APARUP SARKAR | CM TECH</strong>
-    <br><br>
-    © 2026 CM TECH • ALL RIGHTS RESERVED
-  </footer>
+<section class="leaderboard">
+  <h2>🏆 HALL OF FAME</h2>
+  <div class="leader-list" id="leaderList"></div>
+</section>
+
+<footer>
+  DESIGNED & DEVELOPED BY<br>
+  <strong>APARUP SARKAR | CM TECH</strong><br>
+  © 2026 CM TECH
+</footer>
 
 </div>
 
-<!-- START / GAME OVER OVERLAY -->
+<!-- ANIMATED NAME WINDOW -->
 
 <div class="overlay" id="overlay">
+
+  <div class="particles" id="particles"></div>
+  <div class="glow-circle one"></div>
+  <div class="glow-circle two"></div>
+
   <div class="overlay-box">
-    <div class="overlay-icon" id="overlayIcon">🐍</div>
-    <h2 id="overlayTitle">WELCOME PLAYER!</h2>
-    <p id="overlayMessage">
-      Ready to test your skills?<br>
-      Eat the food, grow your snake<br>
-      and become the ultimate champion!
+
+    <div class="snake-icon">🐍</div>
+
+    <h2 class="welcome-title" id="overlayTitle">
+      WELCOME TO<br>SNAKE WORLD!
+    </h2>
+
+    <div class="animated-line"></div>
+
+    <p class="welcome-subtitle" id="overlayMessage">
+      Get ready for an exciting gaming adventure!
     </p>
 
-    <input
-      id="playerName"
-      type="text"
-      maxlength="20"
-      placeholder="ENTER YOUR NAME"
-      autocomplete="off"
-    >
+    <label class="input-label" for="playerName">
+      ✦ ENTER YOUR PLAYER NAME
+    </label>
 
-    <div class="final-score" id="finalScore" hidden>0</div>
+    <div class="input-wrap">
+      <input
+        type="text"
+        id="playerName"
+        maxlength="20"
+        placeholder="Type your name here..."
+        autocomplete="off"
+      >
+    </div>
 
-    <button class="btn primary" id="startBtn">
-      🚀 START GAME
+    <div class="final-score" id="finalScore" hidden></div>
+
+    <button class="start-button" id="startBtn">
+      🚀 START YOUR ADVENTURE
     </button>
+
+    <div class="bottom-text">
+      POWERED BY <span>CM TECH</span> ✦ PLAY & ENJOY
+    </div>
+
   </div>
 </div>
 
 <script>
-/* ==========================
-   GAME CONFIGURATION
-========================== */
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const SIZE = 400;
 const GRID = 20;
-const CELL = SIZE / GRID;
+const CELL = 20;
+const SIZE = 400;
 
 let snake = [];
 let food = {};
@@ -689,7 +776,7 @@ let nextDir = {x:1,y:0};
 
 let score = 0;
 let level = 1;
-let best = 0;
+let best = Number(localStorage.getItem("snakeBest") || 0);
 let speed = 130;
 
 let playerName = "";
@@ -700,30 +787,27 @@ let foodAnimation = 0;
 
 const $ = id => document.getElementById(id);
 
-/* ==========================
-   STORAGE
-========================== */
+$("best").textContent = best;
 
-function getLeaderboard() {
-  try {
-    return JSON.parse(
-      localStorage.getItem("snakeLeaderboard") || "[]"
-    );
-  } catch {
-    return [];
+/* CREATE FLOATING PARTICLES */
+
+function createParticles() {
+  const area = $("particles");
+
+  for(let i=0;i<35;i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random()*100+"%";
+    p.style.animationDuration = (5+Math.random()*8)+"s";
+    p.style.animationDelay = Math.random()*8+"s";
+    p.style.opacity = Math.random();
+    p.style.width = (2+Math.random()*5)+"px";
+    p.style.height = p.style.width;
+    area.appendChild(p);
   }
 }
 
-function getBest() {
-  return Number(localStorage.getItem("snakeBest") || 0);
-}
-
-best = getBest();
-$("best").textContent = best;
-
-/* ==========================
-   INITIALIZE GAME
-========================== */
+/* GAME SETUP */
 
 function newGame() {
   snake = [
@@ -747,31 +831,24 @@ function newGame() {
   draw();
 }
 
-/* ==========================
-   PLACE FOOD
-========================== */
+/* FOOD */
 
 function placeFood() {
   do {
     food = {
-      x: Math.floor(Math.random() * GRID),
-      y: Math.floor(Math.random() * GRID)
+      x:Math.floor(Math.random()*GRID),
+      y:Math.floor(Math.random()*GRID)
     };
-  } while (
-    snake.some(s => s.x === food.x && s.y === food.y)
-  );
+  } while(snake.some(s=>s.x===food.x && s.y===food.y));
 }
 
-/* ==========================
-   DRAW BACKGROUND
-========================== */
+/* BACKGROUND */
 
 function drawBackground() {
-  ctx.fillStyle = "#071322";
+  ctx.fillStyle="#080d20";
   ctx.fillRect(0,0,SIZE,SIZE);
 
-  ctx.strokeStyle = "rgba(0,234,255,0.055)";
-  ctx.lineWidth = 1;
+  ctx.strokeStyle="rgba(168,85,247,.10)";
 
   for(let i=0;i<=GRID;i++) {
     ctx.beginPath();
@@ -786,126 +863,76 @@ function drawBackground() {
   }
 }
 
-/* ==========================
-   DRAW FOOD
-========================== */
+/* FOOD */
 
 function drawFood() {
-  foodAnimation += .08;
+  foodAnimation+=.08;
 
-  const x = food.x*CELL + CELL/2;
-  const y = food.y*CELL + CELL/2;
-
-  const pulse = Math.sin(foodAnimation)*2;
+  const x=food.x*CELL+10;
+  const y=food.y*CELL+10;
+  const r=7+Math.sin(foodAnimation)*2;
 
   ctx.save();
-
-  ctx.shadowColor = "#ff3158";
-  ctx.shadowBlur = 20;
-
-  const gradient = ctx.createRadialGradient(
-    x-3,y-3,1,
-    x,y,9+pulse
-  );
-
-  gradient.addColorStop(0,"#ffffff");
-  gradient.addColorStop(.3,"#ff7590");
-  gradient.addColorStop(1,"#ff1744");
-
-  ctx.fillStyle = gradient;
+  ctx.shadowColor="#ff4da6";
+  ctx.shadowBlur=22;
+  ctx.fillStyle="#ff4da6";
   ctx.beginPath();
-  ctx.arc(x,y,7+pulse*.3,0,Math.PI*2);
+  ctx.arc(x,y,r,0,Math.PI*2);
   ctx.fill();
 
+  ctx.fillStyle="#fff";
+  ctx.beginPath();
+  ctx.arc(x-2,y-2,2,0,Math.PI*2);
+  ctx.fill();
   ctx.restore();
 }
 
-/* ==========================
-   DRAW SNAKE
-========================== */
+/* SNAKE */
 
 function drawSnake() {
-  snake.forEach((part,i) => {
-    const x = part.x*CELL;
-    const y = part.y*CELL;
+  snake.forEach((s,i)=>{
+    const x=s.x*CELL;
+    const y=s.y*CELL;
 
-    const padding = i===0 ? 1.5 : 2.5;
-
-    const gradient = ctx.createLinearGradient(
-      x,y,x+CELL,y+CELL
-    );
+    const gradient=ctx.createLinearGradient(x,y,x+CELL,y+CELL);
 
     if(i===0) {
-      gradient.addColorStop(0,"#c3ffdf");
-      gradient.addColorStop(.4,"#39ff88");
-      gradient.addColorStop(1,"#00b85a");
+      gradient.addColorStop(0,"#d8b4fe");
+      gradient.addColorStop(1,"#38bdf8");
     } else {
-      gradient.addColorStop(0,"#20e99a");
-      gradient.addColorStop(1,"#008f8b");
+      gradient.addColorStop(0,"#a855f7");
+      gradient.addColorStop(1,"#6366f1");
     }
 
     ctx.save();
-
-    ctx.shadowColor = i===0 ? "#39ff88" : "#00dca5";
-    ctx.shadowBlur = i===0 ? 17 : 7;
-
-    ctx.fillStyle = gradient;
-
-    roundedRect(
-      x+padding,
-      y+padding,
-      CELL-padding*2,
-      CELL-padding*2,
-      i===0 ? 7 : 5
-    );
-
+    ctx.shadowColor=i===0?"#38bdf8":"#a855f7";
+    ctx.shadowBlur=i===0?20:9;
+    ctx.fillStyle=gradient;
+    ctx.beginPath();
+    ctx.roundRect(x+2,y+2,16,16,5);
     ctx.fill();
-
     ctx.restore();
 
     if(i===0) drawEyes(x,y);
   });
 }
 
-/* ==========================
-   ROUNDED RECTANGLE
-========================== */
-
-function roundedRect(x,y,w,h,r) {
-  ctx.beginPath();
-  ctx.roundRect(x,y,w,h,r);
-  ctx.fill();
-}
-
-/* ==========================
-   SNAKE EYES
-========================== */
-
 function drawEyes(x,y) {
-  ctx.fillStyle = "#032419";
+  ctx.fillStyle="#09051b";
 
-  let eyes = [];
+  let eyes=[];
 
-  if(dir.x===1) {
-    eyes = [[x+14,y+6],[x+14,y+14]];
-  } else if(dir.x===-1) {
-    eyes = [[x+6,y+6],[x+6,y+14]];
-  } else if(dir.y===-1) {
-    eyes = [[x+6,y+6],[x+14,y+6]];
-  } else {
-    eyes = [[x+6,y+14],[x+14,y+14]];
-  }
+  if(dir.x===1) eyes=[[x+14,y+6],[x+14,y+14]];
+  else if(dir.x===-1) eyes=[[x+6,y+6],[x+6,y+14]];
+  else if(dir.y===-1) eyes=[[x+6,y+6],[x+14,y+6]];
+  else eyes=[[x+6,y+14],[x+14,y+14]];
 
-  eyes.forEach(([ex,ey]) => {
+  eyes.forEach(([ex,ey])=>{
     ctx.beginPath();
     ctx.arc(ex,ey,2,0,Math.PI*2);
     ctx.fill();
   });
 }
-
-/* ==========================
-   DRAW EVERYTHING
-========================== */
 
 function draw() {
   drawBackground();
@@ -913,36 +940,27 @@ function draw() {
   drawSnake();
 }
 
-/* ==========================
-   GAME MOVEMENT
-========================== */
+/* MOVEMENT */
 
 function step() {
   if(!running || paused) return;
 
-  dir = {...nextDir};
+  dir={...nextDir};
 
-  const head = {
-    x: snake[0].x+dir.x,
-    y: snake[0].y+dir.y
+  const head={
+    x:snake[0].x+dir.x,
+    y:snake[0].y+dir.y
   };
 
-  // Wall collision
-  if(
-    head.x<0 || head.x>=GRID ||
-    head.y<0 || head.y>=GRID
-  ) {
+  if(head.x<0 || head.x>=GRID || head.y<0 || head.y>=GRID) {
     gameOver();
     return;
   }
 
-  const eating =
-    head.x===food.x && head.y===food.y;
+  const eating=head.x===food.x && head.y===food.y;
+  const body=eating?snake:snake.slice(0,-1);
 
-  // Self collision
-  const body = eating ? snake : snake.slice(0,-1);
-
-  if(body.some(s => s.x===head.x && s.y===head.y)) {
+  if(body.some(s=>s.x===head.x && s.y===head.y)) {
     gameOver();
     return;
   }
@@ -951,15 +969,13 @@ function step() {
 
   if(eating) {
     score++;
-
     updateScore();
-
     placeFood();
 
     if(score%5===0) {
       level++;
-      speed = Math.max(55,speed-10);
-      $("level").textContent = level;
+      speed=Math.max(55,speed-10);
+      $("level").textContent=level;
       restartTimer();
     }
   } else {
@@ -969,229 +985,172 @@ function step() {
   draw();
 }
 
-/* ==========================
-   UPDATE SCORE
-========================== */
+/* SCORE */
 
 function updateScore() {
-  const el = $("score");
-
-  el.textContent = score;
-
-  el.classList.remove("score-pop");
-  void el.offsetWidth;
-  el.classList.add("score-pop");
+  const el=$("score");
+  el.textContent=score;
+  el.animate(
+    [{transform:"scale(1)"},{transform:"scale(1.5)"},{transform:"scale(1)"}],
+    {duration:300}
+  );
 
   if(score>best) {
-    best = score;
-    $("best").textContent = best;
-
+    best=score;
+    $("best").textContent=best;
     localStorage.setItem("snakeBest",best);
   }
 }
 
-/* ==========================
-   GAME TIMER
-========================== */
+/* TIMER */
 
 function restartTimer() {
   clearInterval(timer);
-
-  timer = setInterval(step,speed);
+  timer=setInterval(step,speed);
 }
 
-/* ==========================
-   START GAME
-========================== */
+/* START */
 
 function startGame() {
   if(!playerName) {
-    const name = $("playerName").value.trim();
-
-    if(!name) {
+    const n=$("playerName").value.trim();
+    if(!n) {
       $("playerName").focus();
-      $("playerName").placeholder = "PLEASE ENTER YOUR NAME!";
+      $("playerName").placeholder="Please enter your name!";
       return;
     }
-
-    playerName = name;
+    playerName=n;
   }
 
   $("overlay").classList.add("hidden");
 
-  paused = false;
-  running = true;
+  $("finalScore").hidden=true;
+  $("playerName").hidden=false;
 
-  $("statusText").textContent = "GAME RUNNING";
-  $("pause").textContent = "Ⅱ PAUSE";
+  running=true;
+  paused=false;
+
+  $("statusText").textContent="GAME RUNNING";
+  $("pause").textContent="Ⅱ PAUSE";
 
   newGame();
   restartTimer();
 }
 
-/* ==========================
-   PAUSE GAME
-========================== */
+/* PAUSE */
 
 function pauseGame() {
   if(!running) return;
 
-  paused = !paused;
+  paused=!paused;
 
-  if(paused) {
-    $("statusText").textContent = "GAME PAUSED";
-    $("pause").textContent = "▶ RESUME";
-  } else {
-    $("statusText").textContent = "GAME RUNNING";
-    $("pause").textContent = "Ⅱ PAUSE";
-  }
+  $("statusText").textContent=paused?"GAME PAUSED":"GAME RUNNING";
+  $("pause").textContent=paused?"▶ RESUME":"Ⅱ PAUSE";
 }
 
-/* ==========================
-   GAME OVER
-========================== */
+/* GAME OVER */
 
 function gameOver() {
   clearInterval(timer);
-
-  running = false;
-  paused = false;
+  running=false;
+  paused=false;
 
   saveScore();
   fetchLeaderboard();
 
-  $("statusText").textContent = "GAME OVER";
+  $("statusText").textContent="GAME OVER";
 
-  $("overlayIcon").textContent = "💀";
-  $("overlayTitle").textContent = "GAME OVER!";
-  $("overlayMessage").innerHTML =
-    "Well played, "+escapeHTML(playerName)+"!<br>Keep practising to become a champion!";
+  $("overlayTitle").textContent="GAME OVER!";
+  $("overlayMessage").textContent="Great effort, "+playerName+"! Try again and beat your best score.";
 
-  $("finalScore").hidden = false;
-  $("finalScore").textContent = score+" POINTS";
+  $("finalScore").textContent=score+" POINTS";
+  $("finalScore").hidden=false;
 
-  $("playerName").hidden = true;
-
-  $("startBtn").textContent = "🔄 PLAY AGAIN";
+  $("playerName").hidden=true;
+  $("startBtn").textContent="🔄 PLAY AGAIN";
 
   $("overlay").classList.remove("hidden");
 }
 
-/* ==========================
-   SAFE HTML TEXT
-========================== */
+/* LEADERBOARD */
 
-function escapeHTML(text) {
-  return text.replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[char]);
+function getLeaderboard() {
+  try {
+    return JSON.parse(localStorage.getItem("snakeLeaderboard")||"[]");
+  } catch {
+    return [];
+  }
 }
-
-/* ==========================
-   SAVE SCORE
-========================== */
 
 function saveScore() {
   try {
-    const data = getLeaderboard();
+    const data=getLeaderboard();
 
     data.push({
-      name: playerName,
-      score: score,
-      time: Date.now()
+      name:playerName,
+      score,
+      time:Date.now()
     });
 
     data.sort((a,b)=>b.score-a.score);
 
-    localStorage.setItem(
-      "snakeLeaderboard",
-      JSON.stringify(data.slice(0,10))
-    );
-  } catch(error) {
-    console.error("Leaderboard save failed",error);
+    localStorage.setItem("snakeLeaderboard",JSON.stringify(data.slice(0,10)));
+  } catch(e) {
+    console.error(e);
   }
 }
 
-/* ==========================
-   LEADERBOARD
-========================== */
-
 function fetchLeaderboard() {
-  const data = getLeaderboard();
-  const list = $("leaderList");
+  const list=$("leaderList");
+  const data=getLeaderboard();
 
-  list.innerHTML = "";
+  list.innerHTML="";
 
   if(!data.length) {
-    list.innerHTML =
-      '<div class="empty-board">No players yet. Be the first champion!</div>';
+    list.innerHTML='<div style="text-align:center;color:#aaa;padding:15px;font-size:12px">No players yet. Be the first champion!</div>';
     return;
   }
 
   data.forEach((p,i)=>{
-    const card = document.createElement("div");
-    card.className = "lb-card";
-    card.style.animationDelay = (i*.06)+"s";
+    const card=document.createElement("div");
+    card.className="lb-card";
+    card.style.animationDelay=i*.07+"s";
 
-    const rank = document.createElement("span");
-    rank.className = "lb-rank";
-    rank.textContent = ["🥇","🥈","🥉"][i] || "#"+(i+1);
+    const rank=document.createElement("span");
+    rank.className="lb-rank";
+    rank.textContent=["🥇","🥈","🥉"][i]||"#"+(i+1);
 
-    const name = document.createElement("span");
-    name.className = "lb-name";
-    name.textContent = p.name;
+    const name=document.createElement("span");
+    name.className="lb-name";
+    name.textContent=p.name;
 
-    const points = document.createElement("span");
-    points.className = "lb-score";
-    points.textContent = p.score+" PTS";
+    const points=document.createElement("span");
+    points.className="lb-score";
+    points.textContent=p.score+" PTS";
 
     card.append(rank,name,points);
     list.appendChild(card);
   });
 }
 
-/* ==========================
-   CHANGE DIRECTION
-========================== */
+/* DIRECTION */
 
-function changeDirection(direction) {
-  if(!running || paused) return;
+function changeDirection(d) {
+  if(!running||paused) return;
 
-  if(direction==="up" && dir.y!==1) {
-    nextDir={x:0,y:-1};
-  }
-
-  if(direction==="down" && dir.y!==-1) {
-    nextDir={x:0,y:1};
-  }
-
-  if(direction==="left" && dir.x!==1) {
-    nextDir={x:-1,y:0};
-  }
-
-  if(direction==="right" && dir.x!==-1) {
-    nextDir={x:1,y:0};
-  }
+  if(d==="up"&&dir.y!==1) nextDir={x:0,y:-1};
+  if(d==="down"&&dir.y!==-1) nextDir={x:0,y:1};
+  if(d==="left"&&dir.x!==1) nextDir={x:-1,y:0};
+  if(d==="right"&&dir.x!==-1) nextDir={x:1,y:0};
 }
 
-/* ==========================
-   KEYBOARD CONTROLS
-========================== */
-
 window.addEventListener("keydown",e=>{
-  const keys = {
+  const keys={
     ArrowUp:"up",
     ArrowDown:"down",
     ArrowLeft:"left",
     ArrowRight:"right",
-    w:"up",
-    s:"down",
-    a:"left",
-    d:"right"
+    w:"up",s:"down",a:"left",d:"right"
   };
 
   if(keys[e.key]) {
@@ -1199,15 +1158,11 @@ window.addEventListener("keydown",e=>{
     changeDirection(keys[e.key]);
   }
 
-  if(e.key===" " && running) {
+  if(e.key===" "&&running) {
     e.preventDefault();
     pauseGame();
   }
 });
-
-/* ==========================
-   MOBILE CONTROLS
-========================== */
 
 document.querySelectorAll(".control[data-dir]").forEach(btn=>{
   btn.addEventListener("pointerdown",e=>{
@@ -1216,45 +1171,33 @@ document.querySelectorAll(".control[data-dir]").forEach(btn=>{
   });
 });
 
-/* ==========================
-   BUTTON EVENTS
-========================== */
+/* BUTTONS */
 
 $("startBtn").addEventListener("click",()=>{
   if(running===false && playerName && $("playerName").hidden) {
-    $("overlayIcon").textContent = "🐍";
-    $("overlayTitle").textContent = "READY PLAYER!";
-    $("overlayMessage").innerHTML =
-      "Your next adventure begins now!";
-    $("finalScore").hidden = true;
-    $("playerName").hidden = false;
-    $("playerName").value = playerName;
-  }
-
-  if(!playerName) {
-    startGame();
-    return;
+    $("overlayTitle").textContent="WELCOME BACK!";
+    $("overlayMessage").textContent="Ready for another exciting adventure?";
+    $("playerName").value=playerName;
+    $("playerName").hidden=false;
+    $("finalScore").hidden=true;
   }
 
   startGame();
 });
 
 $("playerName").addEventListener("keydown",e=>{
-  if(e.key==="Enter") {
-    $("startBtn").click();
-  }
+  if(e.key==="Enter") startGame();
 });
 
 $("restart").addEventListener("click",()=>{
   if(!playerName) return;
 
-  running = true;
-  paused = false;
-
-  $("statusText").textContent = "GAME RUNNING";
-  $("pause").textContent = "Ⅱ PAUSE";
+  running=true;
+  paused=false;
 
   $("overlay").classList.add("hidden");
+  $("statusText").textContent="GAME RUNNING";
+  $("pause").textContent="Ⅱ PAUSE";
 
   newGame();
   restartTimer();
@@ -1262,10 +1205,9 @@ $("restart").addEventListener("click",()=>{
 
 $("pause").addEventListener("click",pauseGame);
 
-/* ==========================
-   INITIAL DISPLAY
-========================== */
+/* INITIALIZE */
 
+createParticles();
 fetchLeaderboard();
 draw();
 
