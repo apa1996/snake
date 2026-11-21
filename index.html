@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>Snake Game — CM TECH</title>
-
 <style>
 :root {
   --bg: #0b1220;
@@ -14,12 +12,10 @@
   --muted: #a0a8c0;
   --card: #131f34;
 }
-
 * {
   box-sizing: border-box;
   font-family: Inter, system-ui, Segoe UI, Roboto, sans-serif;
 }
-
 body {
   margin: 0;
   background: linear-gradient(180deg, var(--bg), #061018);
@@ -30,77 +26,45 @@ body {
   min-height: 100vh;
   padding: 10px;
 }
-
 .wrap {
   width: 100%;
   max-width: 520px;
   padding: 16px;
 }
-
-/* HEADER ANIMATION */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
 }
-
 header h1 {
   font-size: 20px;
   margin: 0;
   color: var(--accent);
-  animation: titleGlow 2s infinite alternate,
-             slideIn 1s ease-out;
 }
-
-@keyframes titleGlow {
-  from {
-    text-shadow: 0 0 5px #22c55e;
-  }
-  to {
-    text-shadow: 0 0 12px #22c55e,
-                 0 0 25px #0ea5a4;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .panel {
   background: var(--panel);
   padding: 14px;
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
-
 canvas {
   width: 100%;
   border-radius: 8px;
   background: #0c1527;
   display: block;
 }
-
 .info {
   display: flex;
   justify-content: space-between;
   margin-top: 8px;
 }
-
 .badge {
   background: rgba(255, 255, 255, 0.05);
   padding: 6px 10px;
   border-radius: 999px;
   font-weight: 600;
 }
-
 .btn {
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -109,19 +73,10 @@ canvas {
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
-
-.btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 12px #22c55e;
-}
-
 .btn:active {
   transform: translateY(1px);
 }
-
-/* TOUCH CONTROLS */
 .touch-pad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -129,7 +84,6 @@ canvas {
   max-width: 300px;
   margin: 10px auto 0;
 }
-
 .pad-btn {
   background: rgba(255, 255, 255, 0.04);
   padding: 14px;
@@ -137,49 +91,21 @@ canvas {
   text-align: center;
   font-size: 18px;
   user-select: none;
-  cursor: pointer;
-  transition: 0.2s;
 }
-
-.pad-btn:active {
-  background: #22c55e;
-  transform: scale(0.9);
-}
-
-/* LEADERBOARD */
 .leaderboard {
   margin-top: 18px;
 }
-
 .leaderboard h2 {
   text-align: center;
   margin: 8px 0;
   color: var(--accent);
-  animation: rainbowGlow 3s infinite alternate;
 }
-
-@keyframes rainbowGlow {
-  0% {
-    color: #22c55e;
-    text-shadow: 0 0 5px #22c55e;
-  }
-  50% {
-    color: #38bdf8;
-    text-shadow: 0 0 12px #38bdf8;
-  }
-  100% {
-    color: #c084fc;
-    text-shadow: 0 0 12px #c084fc;
-  }
-}
-
 .leader-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 10px;
 }
-
 .lb-card {
   background: var(--card);
   border-radius: 12px;
@@ -188,61 +114,25 @@ canvas {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  animation: cardAppear 0.6s ease both;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.lb-card:hover {
-  transform: translateX(6px);
-  box-shadow: 0 0 12px #22c55e;
-}
-
-@keyframes cardAppear {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .lb-rank {
   font-weight: 700;
   color: var(--accent);
   font-size: 16px;
 }
-
 .lb-name {
   font-weight: 600;
 }
-
 .lb-score {
   color: #ffd43b;
   font-weight: 700;
 }
-
-/* FOOTER */
 footer {
   text-align: center;
   font-size: 12px;
   color: var(--muted);
   margin-top: 14px;
-  animation: footerGlow 2s infinite alternate;
 }
-
-footer b {
-  color: #22c55e;
-  text-shadow: 0 0 8px #22c55e;
-}
-
-@keyframes footerGlow {
-  from { opacity: 0.6; }
-  to { opacity: 1; }
-}
-
-/* NAME OVERLAY */
 .name-overlay {
   position: fixed;
   inset: 0;
@@ -252,25 +142,11 @@ footer b {
   align-items: center;
   justify-content: center;
   z-index: 999;
-  animation: fadeIn 0.6s ease;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .name-overlay h2 {
   color: #fff;
   margin-bottom: 10px;
-  animation: bounceText 1.5s infinite;
 }
-
-@keyframes bounceText {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
 .name-overlay input {
   padding: 10px;
   border-radius: 8px;
@@ -279,426 +155,168 @@ footer b {
   max-width: 300px;
   text-align: center;
   font-size: 16px;
-  transition: all 0.3s ease;
 }
-
-.name-overlay input:focus {
-  outline: 2px solid #22c55e;
-  box-shadow: 0 0 15px #22c55e;
-  transform: scale(1.03);
-}
-
-/* SCORE ANIMATION */
-#score {
-  animation: scorePulse 1.5s infinite;
-}
-
-@keyframes scorePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
-/* REDUCED MOTION */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+.name-overlay button {
+  margin-top: 10px;
 }
 </style>
 </head>
-
 <body>
-
 <div class="wrap">
-
 <header>
-  <h1>🐍 Snake Game — CM TECH</h1>
+  <h1>Snake Game — APARUP</h1>
   <span class="badge" id="score">Score: 0</span>
 </header>
-
 <div class="panel">
-
   <canvas id="canvas" width="400" height="400"></canvas>
-
   <div class="info">
     <span class="badge" id="speed">Medium</span>
     <button class="btn" id="restart">Restart</button>
   </div>
-
   <div class="touch-pad">
     <div></div>
     <div class="pad-btn" data-dir="up">▲</div>
     <div></div>
-
     <div class="pad-btn" data-dir="left">◀</div>
     <div class="pad-btn" data-dir="down">▼</div>
     <div class="pad-btn" data-dir="right">▶</div>
   </div>
-
 </div>
-
 <div class="leaderboard panel">
   <h2>🏆 Top 10 Players</h2>
   <div class="leader-list" id="leaderList"></div>
 </div>
-
-<footer>
-  Developed by <b>APARUP SARKAR</b> | CM TECH
-</footer>
-
+<footer>Developed by <b>APARUP SARKAR</b> | CM TECH</footer>
 </div>
 
-<!-- PLAYER NAME OVERLAY -->
 <div class="name-overlay" id="nameOverlay">
-
-  <h2>✨ Enter Your Name ✨</h2>
-
-  <input
-    type="text"
-    id="playerName"
-    placeholder="Your Name"
-    maxlength="20"
-  />
-
-  <button class="btn" id="startBtn">
-    🚀 Start Game
-  </button>
-
+  <h2>Enter Your Name</h2>
+  <input type="text" id="playerName" placeholder="Your Name" maxlength="20" />
+  <button class="btn" id="startBtn">Start Game</button>
 </div>
 
 <script>
-
 const c = document.getElementById("canvas");
 const ctx = c.getContext("2d");
+let cw = c.width, ch = c.height;
+let grid = 20, cs = cw / grid;
+let snake = [], food = {}, dir = { x: 1, y: 0 }, score = 0, speed = 100, loopTimer = null, playerName = "";
 
-let cw = c.width;
-let ch = c.height;
-
-let grid = 20;
-let cs = cw / grid;
-
-let snake = [];
-let food = {};
-
-let dir = { x: 1, y: 0 };
-
-let score = 0;
-let speed = 100;
-let loopTimer = null;
-let playerName = "";
-
-/* START NEW GAME */
 function newGame() {
-
-  snake = [
-    { x: 8, y: 8 },
-    { x: 7, y: 8 },
-    { x: 6, y: 8 }
-  ];
-
+  snake = [{ x: 8, y: 8 }, { x: 7, y: 8 }, { x: 6, y: 8 }];
   dir = { x: 1, y: 0 };
-
   placeFood();
-
   score = 0;
-
   updateUI();
-  draw();
 }
 
-/* PLACE FOOD */
 function placeFood() {
-
   food.x = Math.floor(Math.random() * grid);
   food.y = Math.floor(Math.random() * grid);
-
-  if (snake.some(s => s.x === food.x && s.y === food.y)) {
-    placeFood();
-  }
+  if (snake.some(s => s.x === food.x && s.y === food.y)) placeFood();
 }
 
-/* GAME MOVEMENT */
 function step() {
-
-  const head = {
-    x: snake[0].x + dir.x,
-    y: snake[0].y + dir.y
-  };
-
+  const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
   head.x = (head.x + grid) % grid;
   head.y = (head.y + grid) % grid;
-
-  if (
-    snake.some(
-      (s, i) =>
-        i > 0 &&
-        s.x === head.x &&
-        s.y === head.y
-    )
-  ) {
-    gameOver();
-    return;
-  }
-
+  if (snake.some((s, i) => i > 0 && s.x === head.x && s.y === head.y)) { gameOver(); return; }
   snake.unshift(head);
-
   if (head.x === food.x && head.y === food.y) {
-
     score++;
-
     updateUI();
     placeFood();
-
-  } else {
-
-    snake.pop();
-
-  }
-
+  } else snake.pop();
   draw();
 }
 
-/* DRAW GAME */
 function draw() {
-
   ctx.fillStyle = "#081220";
   ctx.fillRect(0, 0, cw, ch);
-
-  /* FOOD */
   ctx.fillStyle = "#ff3b30";
-
-  ctx.fillRect(
-    food.x * cs + 2,
-    food.y * cs + 2,
-    cs - 4,
-    cs - 4
-  );
-
-  /* SNAKE */
+  ctx.fillRect(food.x * cs + 2, food.y * cs + 2, cs - 4, cs - 4);
   for (let i = 0; i < snake.length; i++) {
-
     const s = snake[i];
-
-    ctx.fillStyle =
-      i === 0 ? "#22c55e" : "#0ea5a4";
-
-    ctx.fillRect(
-      s.x * cs + 1,
-      s.y * cs + 1,
-      cs - 2,
-      cs - 2
-    );
-
+    ctx.fillStyle = i === 0 ? "#22c55e" : "#0ea5a4";
+    ctx.fillRect(s.x * cs + 1, s.y * cs + 1, cs - 2, cs - 2);
   }
 }
 
-/* GAME OVER */
 function gameOver() {
-
   clearInterval(loopTimer);
-  loopTimer = null;
-
   saveScore();
-
-  alert(`Game Over! ${playerName} Score: ${score}`);
-
+  alert(`Game Over! Score: ${score}`);
   fetchLeaderboard();
 }
 
-/* UPDATE SCORE */
 function updateUI() {
-
-  const scoreElement = document.getElementById("score");
-
-  scoreElement.textContent = "Score: " + score;
-
-  scoreElement.style.transform = "scale(1.2)";
-
-  setTimeout(() => {
-    scoreElement.style.transform = "scale(1)";
-  }, 150);
-
+  document.getElementById("score").textContent = "Score: " + score;
 }
 
-/* GAME LOOP */
 function restartLoop() {
-
-  if (loopTimer) {
-    clearInterval(loopTimer);
-  }
-
+  if (loopTimer) clearInterval(loopTimer);
   loopTimer = setInterval(step, speed);
-
 }
 
-/* CHANGE DIRECTION */
-function changeDirection(d) {
-
-  if (d === "up" && dir.y !== 1) {
-    dir = { x: 0, y: -1 };
-  }
-
-  if (d === "down" && dir.y !== -1) {
-    dir = { x: 0, y: 1 };
-  }
-
-  if (d === "left" && dir.x !== 1) {
-    dir = { x: -1, y: 0 };
-  }
-
-  if (d === "right" && dir.x !== -1) {
-    dir = { x: 1, y: 0 };
-  }
-
-}
-
-/* KEYBOARD CONTROLS */
+// Controls
 window.addEventListener("keydown", e => {
-
-  const keys = {
-    ArrowUp: "up",
-    ArrowDown: "down",
-    ArrowLeft: "left",
-    ArrowRight: "right"
-  };
-
-  if (keys[e.key]) {
-    e.preventDefault();
-    changeDirection(keys[e.key]);
-  }
-
+  const k = e.key;
+  if (k === "ArrowUp" && dir.y !== 1) dir = { x: 0, y: -1 };
+  if (k === "ArrowDown" && dir.y !== -1) dir = { x: 0, y: 1 };
+  if (k === "ArrowLeft" && dir.x !== 1) dir = { x: -1, y: 0 };
+  if (k === "ArrowRight" && dir.x !== -1) dir = { x: 1, y: 0 };
 });
+document.querySelectorAll(".pad-btn").forEach(b => b.addEventListener("click", () => {
+  const d = b.dataset.dir;
+  if (d === "up" && dir.y !== 1) dir = { x: 0, y: -1 };
+  if (d === "down" && dir.y !== -1) dir = { x: 0, y: 1 };
+  if (d === "left" && dir.x !== 1) dir = { x: -1, y: 0 };
+  if (d === "right" && dir.x !== -1) dir = { x: 1, y: 0 };
+}));
 
-/* MOBILE CONTROLS */
-document.querySelectorAll(".pad-btn").forEach(b => {
-
-  b.addEventListener("pointerdown", e => {
-
-    e.preventDefault();
-
-    changeDirection(b.dataset.dir);
-
-  });
-
-});
-
-/* SAVE SCORE */
+// Leaderboard — LocalStorage
 function saveScore() {
-
   if (!playerName) return;
-
-  try {
-
-    let data = JSON.parse(
-      localStorage.getItem("snakeLeaderboard") || "[]"
-    );
-
-    data.push({
-      name: playerName,
-      score: score,
-      time: Date.now()
-    });
-
-    data.sort((a, b) => b.score - a.score);
-
-    data = data.slice(0, 10);
-
-    localStorage.setItem(
-      "snakeLeaderboard",
-      JSON.stringify(data)
-    );
-
-  } catch (error) {
-
-    console.error("Could not save leaderboard:", error);
-
-  }
-
+  let data = JSON.parse(localStorage.getItem("snakeLeaderboard") || "[]");
+  data.push({ name: playerName, score: score, time: Date.now() });
+  data.sort((a, b) => b.score - a.score);
+  data = data.slice(0, 10);
+  localStorage.setItem("snakeLeaderboard", JSON.stringify(data));
 }
 
-/* FETCH LEADERBOARD */
 function fetchLeaderboard() {
-
-  const data = JSON.parse(
-    localStorage.getItem("snakeLeaderboard") || "[]"
-  );
-
+  const data = JSON.parse(localStorage.getItem("snakeLeaderboard") || "[]");
   const el = document.getElementById("leaderList");
-
   el.innerHTML = "";
-
   data.forEach((p, i) => {
-
-    const card = document.createElement("div");
-    card.className = "lb-card";
-
-    const rank = document.createElement("span");
-    rank.className = "lb-rank";
-    rank.textContent = "#" + (i + 1);
-
-    const name = document.createElement("span");
-    name.className = "lb-name";
-    name.textContent = p.name;
-
-    const points = document.createElement("span");
-    points.className = "lb-score";
-    points.textContent = p.score;
-
-    card.append(rank, name, points);
-
-    el.appendChild(card);
-
+    el.innerHTML += `
+      <div class="lb-card">
+        <span class="lb-rank">#${i + 1}</span>
+        <span class="lb-name">${p.name}</span>
+        <span class="lb-score">${p.score}</span>
+      </div>`;
   });
-
 }
 
-/* START GAME */
+// Name prompt overlay
 const overlay = document.getElementById("nameOverlay");
-
 document.getElementById("startBtn").addEventListener("click", () => {
-
   const n = document.getElementById("playerName").value.trim();
-
-  if (!n) {
-    alert("Please enter your name!");
-    return;
-  }
-
+  if (!n) return alert("Enter name");
   playerName = n;
-
   overlay.style.display = "none";
-
   newGame();
-
   restartLoop();
-
   fetchLeaderboard();
-
 });
 
-/* ENTER KEY TO START */
-document.getElementById("playerName").addEventListener("keydown", e => {
-
-  if (e.key === "Enter") {
-    document.getElementById("startBtn").click();
-  }
-
-});
-
-/* RESTART GAME */
 document.getElementById("restart").addEventListener("click", () => {
-
   newGame();
   restartLoop();
-
 });
 
-/* INITIAL LOAD */
 fetchLeaderboard();
-
 </script>
-
 </body>
 </html>
+"
